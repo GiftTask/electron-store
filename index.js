@@ -6,13 +6,13 @@ const Conf = require('conf');
 let isInitialized = false;
 
 // Set up the `ipcMain` handler for communication between renderer and main process.
-const initDataListener = () => {
+const initDataListener = (options) => {
 	if (!ipcMain || !app) {
 		throw new Error('Electron Store: You need to call `.initRenderer()` from the main process.');
 	}
 
 	const appData = {
-		defaultCwd: app.getPath('userData'),
+		defaultCwd: options?.defaultCwd ?? app.getPath('userData'),
 		appVersion: app.getVersion()
 	};
 
@@ -69,8 +69,8 @@ class ElectronStore extends Conf {
 		super(options);
 	}
 
-	static initRenderer() {
-		initDataListener();
+	static initRenderer(options) {
+		initDataListener(options);
 	}
 
 	openInEditor() {
