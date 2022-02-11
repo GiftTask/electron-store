@@ -55,7 +55,7 @@ declare class ElectronStore<T extends Record<string, any> = Record<string, unkno
 	/**
 	Initializer to set up the required `ipc` communication channels for the module when a `Store` instance is not created in the main process and you are creating a `Store` instance in the Electron renderer process only.
 	*/
-	static initRenderer(): void;
+	static initRenderer(options?: { defaultCwd: string }): void;
 
 	/**
 	Open the storage file in the user's editor.
